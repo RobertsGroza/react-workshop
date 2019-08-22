@@ -14,7 +14,7 @@ const SignInOutButton = ({ isAuthenticated }) =>
             </Button>
         </NavLink>
 
-const Header = () => {
+const Header = ({isAuthenticated}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -32,11 +32,16 @@ const Header = () => {
                                 <span className="fa fa-home fa-lg"></span> Home
                             </NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink className="nav-link" to="/todo-list">
-                                <span className="fa fa-list fa-lg"></span> TODO list
-                            </NavLink>
-                        </NavItem>
+                        { 
+                            isAuthenticated ?
+                                <NavItem>
+                                    <NavLink className="nav-link" to="/todo-list">
+                                        <span className="fa fa-list fa-lg"></span> TODO list
+                                    </NavLink>
+                                </NavItem>
+                            :
+                                null
+                        }
                     </Nav>
                     <Nav className="ml-auto" navbar>
                         <NavItem>

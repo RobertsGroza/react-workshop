@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Navbar, NavbarBrand, Nav, NavItem, Button, Collapse, NavbarToggler } from 'reactstrap';
+import { Navbar, Nav, NavItem, Button, Collapse, NavbarToggler } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
 const SignInOutButton = ({ isAuthenticated }) =>
@@ -21,9 +21,6 @@ const Header = ({isAuthenticated}) => {
     return (
         <>
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand className="mr-auto" href="/">
-                    <h4 className="mb-0 mr-5">TODO LIST</h4>
-                </NavbarBrand>
                 <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar>
@@ -45,7 +42,7 @@ const Header = ({isAuthenticated}) => {
                     </Nav>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <SignInOutButton isAuthenticated={false} />
+                            <SignInOutButton isAuthenticated={isAuthenticated} />
                         </NavItem>
                     </Nav>
                 </Collapse>

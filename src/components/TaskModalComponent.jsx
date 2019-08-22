@@ -7,15 +7,15 @@ const TaskModal = ({modalOpen, modalData}) =>
             <h3>Task description</h3>
         </ModalHeader>
         <ModalBody>
-            <dl class="row">
-                <dt class="col-sm-3">Name:</dt>
-                <dd class="col-sm-9">{modalData.name}</dd>
-                <dt class="col-sm-3">Description:</dt>
-                <dd class="col-sm-9">{modalData.description}</dd>
-                <dt class="col-sm-3">Due:</dt>
-                <dd class="col-sm-9">{modalData.due}</dd>
-                <dt class="col-sm-3">Priorioty:</dt>
-                <dd class="col-sm-9">{modalData.priority}</dd>
+            <dl className="row">
+                <dt className="col-sm-3">Name:</dt>
+                <dd className="col-sm-9">{modalData.name}</dd>
+                <dt className="col-sm-3">Description:</dt>
+                <dd className="col-sm-9">{modalData.description}</dd>
+                <dt className="col-sm-3">Due:</dt>
+                <dd className="col-sm-9">{modalData.due}</dd>
+                <dt className="col-sm-3">Priorioty:</dt>
+                <dd className="col-sm-9">{modalData.priority}</dd>
             </dl>
         </ModalBody>
         <ModalFooter>

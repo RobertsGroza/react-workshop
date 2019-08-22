@@ -6,8 +6,8 @@ import Home from './HomeComponent';
 import NewTask from './NewTaskComponent';
 import Login from './LoginComponent';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => 
-    <Route {...rest} render={ props => true ? <Component {...props}/> : <Redirect to="/home" /> } />
+const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => 
+    <Route {...rest} render={ props => isAuthenticated ? <Component {...props}/> : <Redirect to="/home" /> } />
 
 const Main = () => 
     <>

@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
-import { Navbar, NavbarBrand, Nav, NavItem, Button, Collapse, NavbarToggler } from 'reactstrap';
+import { Navbar, Nav, NavItem, Button, Collapse, NavbarToggler } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOut } from '../redux/actions/auth';
 
-const SignInOutButton = ({ isAuthenticated }) =>
+const mapDispatchToProps = (dispatch) => ({
+    logOut: () => {dispatch(logOut())}
+})
+
+const SignInOutButton = ({ isAuthenticated, onClick }) =>
     isAuthenticated ? 
-        <Button>
+        <Button onClick={onClick}>
             <span className="fa fa-sign-out fa-lg"></span> Log out
         </Button>
     :
@@ -14,16 +20,13 @@ const SignInOutButton = ({ isAuthenticated }) =>
             </Button>
         </NavLink>
 
-const Header = ({isAuthenticated}) => {
+const Header = ({isAuthenticated, logOut}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
             <Navbar color="dark" dark expand="md">
-                <NavbarBrand className="mr-auto" href="/">
-                    <h4 className="mb-0 mr-5">TODO LIST</h4>
-                </NavbarBrand>
                 <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar>
@@ -45,7 +48,7 @@ const Header = ({isAuthenticated}) => {
                     </Nav>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <SignInOutButton isAuthenticated={false} />
+                            <SignInOutButton isAuthenticated={isAuthenticated} onClick={() => logOut()} />
                         </NavItem>
                     </Nav>
                 </Collapse>
@@ -54,4 +57,4 @@ const Header = ({isAuthenticated}) => {
     )
 }
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);

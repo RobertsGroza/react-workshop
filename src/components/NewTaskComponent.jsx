@@ -2,6 +2,18 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import DatePicker from "react-datepicker";
 import { FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { connect } from 'react-redux';
+import { postTask } from '../redux/actions/tasks';
+
+const mapStateToProps = state => {
+    return {
+        user: state.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    postTask: (task, userId) => {dispatch(postTask(task, userId))}
+})
 
 const DatePickerField = ({ name, value, onChange }) => {
     return (
@@ -26,10 +38,10 @@ const customInputForm = ({field, form: {touched, errors}, ...props}) => (
     </>
 );
 
-const NewTaskForm = () => {
+const NewTaskForm = ({user, postTask}) => {
 
     const handleSubmit = (values) => {
-        alert(`Jūs iesniedzāt ${JSON.stringify(values)}`);
+        postTask(values, user.id)
     }
 
     return (
@@ -85,4 +97,4 @@ const NewTaskForm = () => {
     )
 }
 
-export default NewTaskForm;
+export default connect(mapStateToProps, mapDispatchToProps)(NewTaskForm);

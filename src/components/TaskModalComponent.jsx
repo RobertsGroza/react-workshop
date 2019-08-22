@@ -4,7 +4,7 @@ import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 const TaskModal = ({modalOpen, modalData}) =>
     <Modal isOpen={modalOpen} size="lg">
         <ModalHeader>
-            <h3>Task description</h3>
+            Task description
         </ModalHeader>
         <ModalBody>
             <dl className="row">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from 'reactstrap';
 
-const TaskModal = ({modalOpen, modalData}) =>
+const TaskModal = ({modalOpen, modalData, closeModal, markTaskAsCompleted}) =>
     <Modal isOpen={modalOpen} size="lg">
         <ModalHeader>
             Task description
@@ -19,8 +19,11 @@ const TaskModal = ({modalOpen, modalData}) =>
             </dl>
         </ModalBody>
         <ModalFooter>
-            <Button color="secondary" outline onClick={() => console.log('close modal!')}>Back</Button>
-            <Button color="success" onClick={() => console.log('finish this sucker')}>Mark as Completed</Button>
+            <Button color="secondary" outline onClick={() => closeModal()}>Back</Button>
+            <Button color="success" onClick={async () => {
+                await markTaskAsCompleted(); 
+                closeModal();
+            }}>Mark as Completed</Button>
         </ModalFooter>
     </Modal>
 

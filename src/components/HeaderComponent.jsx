@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
 import { Navbar, Nav, NavItem, Button, Collapse, NavbarToggler } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logOut } from '../redux/actions/auth';
 
-const SignInOutButton = ({ isAuthenticated }) =>
+const mapDispatchToProps = (dispatch) => ({
+    logOut: () => {dispatch(logOut())}
+})
+
+const SignInOutButton = ({ isAuthenticated, onClick }) =>
     isAuthenticated ? 
-        <Button>
+        <Button onClick={onClick}>
             <span className="fa fa-sign-out fa-lg"></span> Log out
         </Button>
     :
@@ -14,7 +20,7 @@ const SignInOutButton = ({ isAuthenticated }) =>
             </Button>
         </NavLink>
 
-const Header = ({isAuthenticated}) => {
+const Header = ({isAuthenticated, logOut}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -42,7 +48,7 @@ const Header = ({isAuthenticated}) => {
                     </Nav>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <SignInOutButton isAuthenticated={isAuthenticated} />
+                            <SignInOutButton isAuthenticated={isAuthenticated} onClick={() => logOut()} />
                         </NavItem>
                     </Nav>
                 </Collapse>
@@ -51,4 +57,4 @@ const Header = ({isAuthenticated}) => {
     )
 }
 
-export default Header;
+export default connect(null, mapDispatchToProps)(Header);

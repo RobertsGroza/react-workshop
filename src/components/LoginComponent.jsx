@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Button, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
+import { logIn } from '../redux/actions/auth';
 
-const Login = () => {
+const mapDispatchToProps = (dispatch) => ({
+    logIn: (username) => {dispatch(logIn(username))}
+})
+
+const Login = (props) => {
     const [value, setValue] = useState('');
     const [numberCount, setNumberCount] = useState(0);
 
@@ -17,6 +23,10 @@ const Login = () => {
         console.log(`hooks: useEffect just on number count change. BTW numberCount is ${numberCount}`);
     }, [numberCount]);
 
+    const handleSubmit = (username) => {
+        props.logIn(username);
+    }
+
     return (
         <div className="container">
             <Row style={{marginTop: '100px'}}>
@@ -31,11 +41,11 @@ const Login = () => {
                             setNumberCount(val.replace(/[^[0-9]/g, '').length);
                         }} 
                     />
-                    <Button onClick={() => alert(`Your name is: ${value}`)}>Proceed</Button>
+                    <Button onClick={() => handleSubmit(value)}>Proceed</Button>
                 </Col>
             </Row>
         </div>
     )
 }
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
